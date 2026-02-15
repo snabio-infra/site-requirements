@@ -1,5 +1,3 @@
-
-
 Dockerfile
 ```dockerfile
 # ---------- build stage ----------
@@ -51,13 +49,16 @@ server {
 docker-compose.yml
 ```yaml
 services:
-  SERVICE_NAME:
-    build:
-      context: .
-    container_name: SERVICE_NAME
+  FRONT_NAME:
+    build: .
+    container_name: FRONT_NAME
     restart: unless-stopped
     networks:
       - web
+	environment:
+      - VIRTUAL_HOST=front1.example.com
+      - LETSENCRYPT_HOST=front1.example.com
+      - LETSENCRYPT_EMAIL=admin@example.com
 
 networks:
   web:
